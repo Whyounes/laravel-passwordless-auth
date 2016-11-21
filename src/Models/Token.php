@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Token extends Model
 {
+
     protected $table = "user_tokens";
 
     protected $fillable = [
         'token',
         'created_at',
-        'user_id'
+        'user_id',
     ];
 
     protected $dates = ['created_at'];
+
 
     /**
      * Is token expired.
@@ -24,8 +26,9 @@ class Token extends Model
      */
     public function isExpired()
     {
-        return $this->created_at->diffInMinutes(Carbon::now()) > (int) config("passwordless.expire_in");
+        return $this->created_at->diffInMinutes(Carbon::now()) > (int)config("passwordless.expire_in");
     }
+
 
     /**
      * Is not used and not expired.
@@ -34,15 +37,21 @@ class Token extends Model
      */
     public function isValid()
     {
-        return !$this->isExpired();
+        return ! $this->isExpired();
     }
+
 
     /**
      * Ignore the updated_at column.
+     *
      * @param mixed $value
+     *
      * @return null
      */
-    public function setUpdatedAt($value) {}
+    public function setUpdatedAt($value)
+    {
+    }
+
 
     /**
      * Token belongs to auth user

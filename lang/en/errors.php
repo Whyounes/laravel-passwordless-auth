@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "invalid_token" => "Invalid token"
+    "invalid_token" => "Invalid token",
 ];

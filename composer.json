@@ -2,7 +2,10 @@
   "name": "whyounes/laravel-passwordless-auth",
   "type": "library",
   "description": "Laravel passwordless authentication for Laravel",
-  "keywords": ["auth","passwordless"],
+  "keywords": [
+    "auth",
+    "passwordless"
+  ],
   "homepage": "https://github.com/whyounes/laravel-passwordless-auth",
   "license": "MIT",
   "authors": [
