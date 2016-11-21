@@ -1,0 +1,24 @@
+{
+  "name": "whyounes/laravel-passwordless-auth",
+  "type": "library",
+  "description": "Laravel passwordless authentication for Laravel",
+  "keywords": ["auth","passwordless"],
+  "homepage": "https://github.com/whyounes/laravel-passwordless-auth",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rafie Younes",
+      "email": "younes.rafie@gmail.com",
+      "homepage": "http://younesrafie.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^5.5.9 || ^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Whyounes": "src"
+    }
+  }
+}
