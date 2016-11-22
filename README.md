@@ -41,7 +41,7 @@ Add the `Passwordless` trait to your user model:
 
 class User extends Authenticatable
 {
-    use Whyounes\Traits\Passwordless;
+    use Whyounes\Passwordless\Traits\Passwordless;
 
     // ...
 }
@@ -56,7 +56,7 @@ If you don't want to use the user email along with the token, you can change it 
 
 class User extends Authenticatable
 {
-    use Whyounes\Traits\Passwordless;
+    use Whyounes\Passwordless\Traits\Passwordless;
 
     // ...
     

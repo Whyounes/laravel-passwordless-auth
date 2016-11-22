@@ -1,6 +1,6 @@
 <?php
 
-namespace Whyounes\Traits;
+namespace Whyounes\Passwordless\Traits;
 
 use Whyounes\Passwordless\Exceptions\InvalidTokenException;
 use Whyounes\Passwordless\Models\Token;
