@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Whyounes\\": "src"
+      "Whyounes\\Passwordless\\": "src"
     }
   }
 }
