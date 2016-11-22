@@ -79,6 +79,6 @@ trait Passwordless
      */
     protected function getIdentifierKey()
     {
-        return 'id';
+        return 'email';
     }
 }
