@@ -16,8 +16,8 @@ class TokenTest extends TestCase
     {
         $token = new Token(
             [
-            'token'      => 'token',
-            'created_at' => Carbon::now(),
+                'token'      => 'token',
+                'created_at' => Carbon::now(),
             ]
         );
 
@@ -34,9 +34,9 @@ class TokenTest extends TestCase
     {
         $token = new Token(
             [
-            'token'      => 'token',
-            'created_at' => Carbon::now()
-                                  ->subMinutes(20),
+                'token'      => 'token',
+                'created_at' => Carbon::now()
+                    ->subMinutes(20),
             ]
         );
 

@@ -10,34 +10,34 @@ trait Passwordless
     /**
      * Validate attributes.
      *
-     * @param  string $token
-     * @return bool
+     * @param  string $token Token
+     * @throws InvalidTokenException
      */
-    public function isValidToken($token)
+    public function validateToken($token)
     {
-        if(!$token) {
-            return false;
+        if (! $this->isValidToken($token)) {
+            throw new InvalidTokenException(trans("passwordless.errors.invalid_token"));
         }
-
-        /**
- * @var $tokenModel Token 
-*/
-        $tokenModel = $this->tokens()->where('token', $token)->first();
-
-        return $tokenModel ? $tokenModel->isValid() : false;
     }
 
     /**
      * Validate attributes.
      *
-     * @param  string $token
-     * @throws InvalidTokenException
+     * @param  string $token Token
+     * @return bool
      */
-    public function validateToken($token)
+    public function isValidToken($token)
     {
-        if (!$this->isValidToken($token)) {
-            throw new InvalidTokenException(trans("passwordless.errors.invalid_token"));
+        if (! $token) {
+            return false;
         }
+
+        /**
+         * @var $tokenModel Token
+         */
+        $tokenModel = $this->tokens()->where('token', $token)->first();
+
+        return $tokenModel ? $tokenModel->isValid() : false;
     }
 
     /**
@@ -50,14 +50,14 @@ trait Passwordless
     public function generateToken($save = false)
     {
         $attributes = [
-            'token'         => str_random(16),
-            'is_used'       => false,
-            'user_id'       => $this->id,
-            'created_at'    => time()
+            'token'      => str_random(16),
+            'is_used'    => false,
+            'user_id'    => $this->id,
+            'created_at' => time()
         ];
 
         $token = new Token($attributes);
-        if($save) {
+        if ($save) {
             $token->save();
         }
 

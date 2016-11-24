@@ -18,18 +18,6 @@ class Token extends Model
 
     protected $dates = ['created_at'];
 
-
-    /**
-     * Is token expired.
-     *
-     * @return bool
-     */
-    public function isExpired()
-    {
-        return $this->created_at->diffInMinutes(Carbon::now()) > (int)config("passwordless.expire_in");
-    }
-
-
     /**
      * Is not used and not expired.
      *
@@ -40,11 +28,21 @@ class Token extends Model
         return ! $this->isExpired();
     }
 
+    /**
+     * Is token expired.
+     *
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return $this->created_at
+            ->diffInMinutes(Carbon::now()) > (int)config("passwordless.expire_in");
+    }
 
     /**
      * Ignore the updated_at column.
      *
-     * @param mixed $value
+     * @param mixed $value Update date
      *
      * @return null
      */

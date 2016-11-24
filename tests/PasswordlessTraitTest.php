@@ -70,16 +70,16 @@ class PasswordlessTraitTest extends TestCase
      * @test
      * @runTestsInSeparateProcesses
      * @preserveGlobalState disabled
-     * @covers Whyounes\Passwordless\Traits\Passwordless::generateToken()
+     * @covers              Whyounes\Passwordless\Traits\Passwordless::generateToken()
      */
     public function assert_it_generates_token_and_save_it()
     {
         $this->markTestSkipped("Could not overload token class");
 
         m::mock("overload:".Token::class)
-         ->shouldReceive('save')
-         ->once()
-         ->andReturn(true);
+            ->shouldReceive('save')
+            ->once()
+            ->andReturn(true);
         $token = $this->passwordlessStub->generateToken(true);
 
         $this->assertInstanceOf(Token::class, $token);
@@ -112,7 +112,7 @@ class PasswordlessTraitTestStub
 
     public function __construct()
     {
-        $this->id    = 1;
+        $this->id = 1;
         $this->email = 'younes.rafie@gmail.com';
         $this->setTokens();
         $this->setTokensMock();
@@ -124,15 +124,15 @@ class PasswordlessTraitTestStub
      */
     private function setTokens()
     {
-        $now          = Carbon\Carbon::now();
+        $now = Carbon\Carbon::now();
         $this->tokens = collect();
 
         for ($i = 1; $i < 5; $i++) {
             $this->tokens[] = new Token(
                 [
-                'token'      => "token-{$i}",
-                'user_id'    => 1,
-                'created_at' => $now->subMinutes(5 * $i),
+                    'token'      => "token-{$i}",
+                    'user_id'    => 1,
+                    'created_at' => $now->subMinutes(5 * $i),
                 ]
             );
         }
@@ -145,14 +145,14 @@ class PasswordlessTraitTestStub
     private function setTokensMock()
     {
         $this->tokensMock = m::mock(stdClass::class);
-        $tokens           = $this->tokens;
+        $tokens = $this->tokens;
 
         $this->tokensMock->shouldReceive('where')
             ->andReturnUsing(
                 function () use ($tokens) {
-                                    $foundToken = $tokens->where('token', func_get_arg(1));
+                    $foundToken = $tokens->where('token', func_get_arg(1));
 
-                                    return $foundToken;
+                    return $foundToken;
                 }
             );
     }

@@ -16,13 +16,13 @@ class CreateUserTokensMigration extends Migration
     {
         Schema::create(
             'user_tokens', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('token');
-                $table->integer('user_id')
-                    ->unsigned();
-                $table->timestamp('created_at')
-                    ->nullable();
-            }
+            $table->increments('id');
+            $table->string('token');
+            $table->integer('user_id')
+                ->unsigned();
+            $table->timestamp('created_at')
+                ->nullable();
+        }
         );
     }
 

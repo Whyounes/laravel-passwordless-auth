@@ -18,29 +18,34 @@ class PasswordlessProvider extends ServiceProvider
         //$this->loadTranslationsFrom(__DIR__.'/../../lang', 'passwordless');
         $this->publishes(
             [
-            __DIR__.'/../../config/passwordless.php' => config_path('passwordless.php'),
-            __DIR__.'/../../lang'                    => resource_path('lang/vendor/passwordless'),
+                __DIR__.'/../../config/passwordless.php' => config_path('passwordless.php'),
+                __DIR__.'/../../lang'                    => resource_path('lang/vendor/passwordless'),
             ]
         );
     }
 
+    /**
+     * Regsiter application components
+     */
+    public function register()
+    {
+        $this->registerEvents();
+    }
 
+    /**
+     * Register application event listeners
+     */
     public function registerEvents()
     {
         // Delete user tokens after login
         if (config('passwordless.empty_tokens_after_login') === true) {
             Event::listen(
-                Authenticated::class, function ($event) {
+                Authenticated::class,
+                function ($event) {
                     $event->user->tokens()
                         ->delete();
                 }
             );
         }
-    }
-
-
-    public function register()
-    {
-        $this->registerEvents();
     }
 }
