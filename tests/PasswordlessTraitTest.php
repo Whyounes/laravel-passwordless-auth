@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Auth\Events\Authenticated;
+use Illuminate\Foundation\Testing\Concerns\ImpersonatesUsers;
 use Mockery as m;
 use Orchestra\Testbench\TestCase;
 use Whyounes\Passwordless\Exceptions\InvalidTokenException;
@@ -8,9 +10,9 @@ use Whyounes\Passwordless\Traits\Passwordless;
 
 class PasswordlessTraitTest extends TestCase
 {
+    use ImpersonatesUsers;
 
     private $passwordlessStub;
-
 
     public function setUp()
     {
@@ -92,7 +94,9 @@ class PasswordlessTraitTest extends TestCase
      */
     public function assert_deletes_tokens_after_auth()
     {
-
+        // This is called after authentication
+        $this->passwordlessStub->tokens()->delete();
+        $this->assertEquals(0, $this->passwordlessStub->tokens->count());
     }
 }
 
@@ -149,12 +153,17 @@ class PasswordlessTraitTestStub
 
         $this->tokensMock->shouldReceive('where')
             ->andReturnUsing(
-                function () use ($tokens) {
-                    $foundToken = $tokens->where('token', func_get_arg(1));
+                function () {
+                    $foundToken = $this->tokens->where('token', func_get_arg(1));
 
                     return $foundToken;
                 }
             );
+
+        $this->tokensMock->shouldReceive('delete')
+            ->andReturnUsing(function () {
+                $this->tokens = collect();
+            });
     }
 
 

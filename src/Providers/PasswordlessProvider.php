@@ -42,6 +42,7 @@ class PasswordlessProvider extends ServiceProvider
             Event::listen(
                 Authenticated::class,
                 function ($event) {
+                    \Log::info($event->user->id);
                     $event->user->tokens()
                         ->delete();
                 }
