@@ -149,7 +149,6 @@ class PasswordlessTraitTestStub
     private function setTokensMock()
     {
         $this->tokensMock = m::mock(stdClass::class);
-        $tokens = $this->tokens;
 
         $this->tokensMock->shouldReceive('where')
             ->andReturnUsing(
