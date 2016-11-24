@@ -10,7 +10,7 @@ trait Passwordless
     /**
      * Validate attributes.
      *
-     * @param string $token
+     * @param  string $token
      * @return bool
      */
     public function isValidToken($token)
@@ -19,7 +19,9 @@ trait Passwordless
             return false;
         }
 
-        /** @var $tokenModel Token */
+        /**
+ * @var $tokenModel Token 
+*/
         $tokenModel = $this->tokens()->where('token', $token)->first();
 
         return $tokenModel ? $tokenModel->isValid() : false;
@@ -28,7 +30,7 @@ trait Passwordless
     /**
      * Validate attributes.
      *
-     * @param string $token
+     * @param  string $token
      * @throws InvalidTokenException
      */
     public function validateToken($token)

@@ -128,11 +128,13 @@ class PasswordlessTraitTestStub
         $this->tokens = collect();
 
         for ($i = 1; $i < 5; $i++) {
-            $this->tokens[] = new Token([
+            $this->tokens[] = new Token(
+                [
                 'token'      => "token-{$i}",
                 'user_id'    => 1,
                 'created_at' => $now->subMinutes(5 * $i),
-            ]);
+                ]
+            );
         }
     }
 
@@ -146,11 +148,13 @@ class PasswordlessTraitTestStub
         $tokens           = $this->tokens;
 
         $this->tokensMock->shouldReceive('where')
-                         ->andReturnUsing(function () use ($tokens) {
-                             $foundToken = $tokens->where('token', func_get_arg(1));
+            ->andReturnUsing(
+                function () use ($tokens) {
+                                    $foundToken = $tokens->where('token', func_get_arg(1));
 
-                             return $foundToken;
-                         });
+                                    return $foundToken;
+                }
+            );
     }
 
 

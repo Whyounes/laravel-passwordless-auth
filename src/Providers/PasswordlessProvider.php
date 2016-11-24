@@ -16,10 +16,12 @@ class PasswordlessProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../../migrations');
         //$this->loadTranslationsFrom(__DIR__.'/../../lang', 'passwordless');
-        $this->publishes([
+        $this->publishes(
+            [
             __DIR__.'/../../config/passwordless.php' => config_path('passwordless.php'),
             __DIR__.'/../../lang'                    => resource_path('lang/vendor/passwordless'),
-        ]);
+            ]
+        );
     }
 
 
@@ -27,10 +29,12 @@ class PasswordlessProvider extends ServiceProvider
     {
         // Delete user tokens after login
         if (config('passwordless.empty_tokens_after_login') === true) {
-            Event::listen(Authenticated::class, function ($event) {
-                $event->user->tokens()
-                            ->delete();
-            });
+            Event::listen(
+                Authenticated::class, function ($event) {
+                    $event->user->tokens()
+                        ->delete();
+                }
+            );
         }
     }
 
