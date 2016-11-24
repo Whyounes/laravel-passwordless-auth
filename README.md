@@ -2,6 +2,12 @@
 
 Passwordless authentication for Laravel 5
 
+<p>
+    <a href="https://travis-ci.org/Whyounes/laravel-passwordless-auth">
+        <img src="https://travis-ci.org/Whyounes/laravel-passwordless-auth.svg?branch=master" alt="Build status" />
+    </a>
+</p>
+
 ## Installation
 
 Add the package to your project using Composer:

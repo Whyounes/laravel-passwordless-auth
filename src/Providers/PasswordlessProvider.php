@@ -15,7 +15,6 @@ class PasswordlessProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../../migrations');
-        //$this->loadTranslationsFrom(__DIR__.'/../../lang', 'passwordless');
         $this->publishes(
             [
                 __DIR__.'/../../config/passwordless.php' => config_path('passwordless.php'),
@@ -42,7 +41,6 @@ class PasswordlessProvider extends ServiceProvider
             Event::listen(
                 Authenticated::class,
                 function ($event) {
-                    \Log::info($event->user->id);
                     $event->user->tokens()
                         ->delete();
                 }
