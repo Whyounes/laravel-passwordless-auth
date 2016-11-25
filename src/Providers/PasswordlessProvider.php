@@ -40,7 +40,7 @@ class PasswordlessProvider extends ServiceProvider
         if (config('passwordless.empty_tokens_after_login') === true) {
             Event::listen(
                 Authenticated::class,
-                function ($event) {
+                function (Authenticated $event) {
                     $event->user->tokens()
                         ->delete();
                 }
