@@ -6,6 +6,9 @@ Passwordless authentication for Laravel 5
     <a href="https://travis-ci.org/Whyounes/laravel-passwordless-auth">
         <img src="https://travis-ci.org/Whyounes/laravel-passwordless-auth.svg?branch=master" alt="Build status" />
     </a>
+    <a href="https://insight.sensiolabs.com/projects/8c7964bf-58d5-4229-928b-d57010f71977">
+        <img src="https://insight.sensiolabs.com/projects/8c7964bf-58d5-4229-928b-d57010f71977/mini.png" />
+    </a>
 </p>
 
 ## Installation
