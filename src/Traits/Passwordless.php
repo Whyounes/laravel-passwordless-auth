@@ -4,6 +4,7 @@ namespace Whyounes\Passwordless\Traits;
 
 use Whyounes\Passwordless\Exceptions\InvalidTokenException;
 use Whyounes\Passwordless\Models\Token;
+use Illuminate\Support\Facades\App;
 
 trait Passwordless
 {
@@ -56,7 +57,8 @@ trait Passwordless
             'created_at' => time()
         ];
 
-        $token = new Token($attributes);
+        $token = App::make(Token::class);
+        $token->fill($attributes);
         if ($save) {
             $token->save();
         }

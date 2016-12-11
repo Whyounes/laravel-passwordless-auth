@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Foundation\Testing\Concerns\ImpersonatesUsers;
 use Mockery as m;
 use Orchestra\Testbench\TestCase;
@@ -76,12 +75,13 @@ class PasswordlessTraitTest extends TestCase
      */
     public function assert_it_generates_token_and_save_it()
     {
-        $this->markTestSkipped("Could not overload token class");
-
-        m::mock("overload:".Token::class)
+        $tokenMock = m::mock(Token::class."[save]");
+        $tokenMock->shouldDeferMissing()
             ->shouldReceive('save')
             ->once()
             ->andReturn(true);
+        $this->app->instance(Token::class, $tokenMock);
+
         $token = $this->passwordlessStub->generateToken(true);
 
         $this->assertInstanceOf(Token::class, $token);
@@ -94,6 +94,7 @@ class PasswordlessTraitTest extends TestCase
      */
     public function assert_deletes_tokens_after_auth()
     {
+        // Please contact me if you have a better way to test this :)
         // This is called after authentication
         $this->passwordlessStub->tokens()->delete();
         $this->assertEquals(0, $this->passwordlessStub->tokens->count());
